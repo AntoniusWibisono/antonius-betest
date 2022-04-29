@@ -5,7 +5,10 @@
   "main": "app/index.js",
   "scripts": {
     "start": "node app/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint \"./**/*.js\" --quiet",
+    "lintFull": "eslint \"./**/*.js\"",
+    "lintFix": "eslint --fix \"./**/*.js\""
   },
   "repository": {
     "type": "git",
@@ -25,5 +28,37 @@
     "lodash": "^4.17.21",
     "mongoose": "^6.3.1",
     "redis": "^4.0.6"
-  }
+  },
+  "devDependencies": {
+    "eslint": "^8.14.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0"
+  },
+  "eslintConfig": {
+    "extends": "airbnb-base",
+    "env": {
+        "es6": true,
+        "browser": true
+          },
+    "rules": {
+        "brace-style": [
+            "error",
+            "stroustrup"
+        ],
+        "comma-dangle": [
+            "error",
+            "never"
+        ],
+        "no-unused-vars": [
+            "warn"
+        ],
+        "no-var": [
+            "off"
+        ],
+        "one-var": [
+            "off"
+        ]
+    }
+  },
+  "eslintIgnore": ["docker-compose.yml"]
 }
