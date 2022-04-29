@@ -1,0 +1,16 @@
+version: '3.9'
+services:
+  mongodb:
+    image: bitnami/mongodb:4.4
+    volumes:
+      - ./volumes/mongodb:/bitnami/mongodb
+    ports:
+      - "27017:27017"
+  redis:
+    image: redis:5.0
+    volumes:
+      - ./volumes/redis:/data
+    ports:
+      - "6379:6379"
+  
+  
