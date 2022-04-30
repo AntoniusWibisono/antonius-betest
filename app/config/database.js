@@ -40,5 +40,4 @@ module.exports = {
   mongoDb,
   getAsync,
   setAsync
-  // redisDb,
 };

@@ -95,9 +95,17 @@ const findUserByQuery = async (req, res) => {
 const updateUserData = async (req, res) => {
   try {
     const { password } = req.body;
-    const { id } = req.params;
+    const { identityNumber } = req.params;
+    
+    const { identityNumber: userIdentityNumber } = req.user;
+  
+    if (identityNumber != userIdentityNumber ) {
+        return res.status(403).json({
+            message: 'user not authorized'
+        })
+    }
     req.body.password = encryptPass(password);
-    const checkData = await getUserByQuery({ identityNumber: id });
+    const checkData = await getUserByQuery({ identityNumber });
     if (!checkData) {
       return res.status(404).json({
         message: 'user data not found'
@@ -115,8 +123,8 @@ const updateUserData = async (req, res) => {
 
 const deleteUserData = async (req, res) => {
   try {
-    const { id } = req.params;
-    const checkData = await getUserByQuery({ identityNumber: id });
+    const { identityNumber } = req.params;
+    const checkData = await getUserByQuery({ identityNumber });
     if (!checkData) {
       return res.status(404).json({
         message: 'user data not found'
@@ -137,6 +145,6 @@ module.exports = (router) => {
   router.post('/login', loginUser);
   router.use(validateAuth);
   router.get('/', findUserByQuery);
-  router.put('/:id', updateUserData);
-  router.delete('/:id', deleteUserData);
+  router.put('/:identityNumber', updateUserData);
+  router.delete('/:identityNumber', deleteUserData);
 };

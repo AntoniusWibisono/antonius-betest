@@ -3,9 +3,8 @@ const User = require('../model/user');
 
 const createUser = async (data) => {
   try {
-    const user = new User(data);
-    user.password = encryptPass(user.password);
-    const result = await user.save();
+    data.password = encryptPass(data.password);
+    const result = await User.create(data);
     return result;
   }
   catch (error) {
@@ -16,7 +15,7 @@ const createUser = async (data) => {
 
 const getUserByQuery = async (query) => {
   try {
-    const result = await User.findOne(query, { password: 0, _id: 0, __v: 0 });
+    const result = await User.findOne(query, { password: 0, __v: 0 });
     return result;
   }
   catch (error) {
@@ -27,7 +26,7 @@ const getUserByQuery = async (query) => {
 
 const getUserAuthByQuery = async (query) => {
   try {
-    const result = await User.findOne(query, { password: 1, userName: 1 });
+    const result = await User.findOne(query, { password: 1, userName: 1, identityNumber: 1 });
     return result;
   }
   catch (error) {
