@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-const JWTSECRET = 'jwt-jenius-12345';
+const { JWTSECRET } = process.env;
 const saltRounds = 10;
 
 const encryptPass = (pass) => bcrypt.hashSync(pass, saltRounds);

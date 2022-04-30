@@ -47,8 +47,8 @@ const registerUser = async (req, res) => {
   }
   catch (error) {
     return res.status(500).json({
-        message: error.message
-      });
+      message: error.message
+    });
   }
 };
 
@@ -96,13 +96,13 @@ const updateUserData = async (req, res) => {
   try {
     const { password } = req.body;
     const { identityNumber } = req.params;
-    
+
     const { identityNumber: userIdentityNumber } = req.user;
-  
-    if (identityNumber != userIdentityNumber ) {
-        return res.status(403).json({
-            message: 'user not authorized'
-        })
+
+    if (identityNumber != userIdentityNumber) {
+      return res.status(403).json({
+        message: 'user not authorized'
+      });
     }
     req.body.password = encryptPass(password);
     const checkData = await getUserByQuery({ identityNumber });
@@ -116,8 +116,8 @@ const updateUserData = async (req, res) => {
   }
   catch (error) {
     return res.status(500).json({
-        message: error.message
-      });
+      message: error.message
+    });
   }
 };
 
@@ -135,8 +135,8 @@ const deleteUserData = async (req, res) => {
   }
   catch (error) {
     return res.status(500).json({
-        message: error.message
-      });
+      message: error.message
+    });
   }
 };
 

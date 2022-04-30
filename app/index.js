@@ -1,5 +1,7 @@
 const express = require('express');
 const enrouten = require('express-enrouten');
+require('dotenv').config();
+
 const { mongoDb } = require('./config/database');
 
 const app = express();

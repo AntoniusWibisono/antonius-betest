@@ -2,10 +2,10 @@ const mongoose = require('mongoose');
 const redis = require('redis');
 const { promisify } = require('util');
 
-const DB_NAME = 'db_antonius_betest';
-const DB_URL = `mongodb://localhost:27017/${DB_NAME}`;
-const HOST_REDIS = 'redis1';
-const PORT_REDIS = '6379';
+const { DB_NAME } = process.env;
+const DB_URL = `mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}/${DB_NAME}`;
+const { HOST_REDIS } = process.env;
+const { PORT_REDIS } = process.env;
 
 const mongoDb = () => {
   mongoose.connect(DB_URL);
